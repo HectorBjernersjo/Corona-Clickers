@@ -8,15 +8,23 @@ public class InfectedScript : MonoBehaviour
 {
    public static double Infected;
    public static double InfectedPerTap = 1;
-   public static double InfectedPerSec = 0.1;
+   public static double InfectedPerSec = 0;
 
    public Text InfectedText;
-   public Text InfecdedTextShop;
+
+   CoronaAnimator coronaAnimator;
+
+   private void Start()
+   {
+      coronaAnimator = GetComponentInChildren<CoronaAnimator>();
+   }
 
    private void Update()
    {
+      //Infecta varje sekund
       Infected += InfectedPerSec * Time.deltaTime;
       UpdateInfectedTexts();
+
    }
 
 
@@ -24,11 +32,11 @@ public class InfectedScript : MonoBehaviour
    {
       Infected += 1;
       UpdateInfectedTexts();
+      coronaAnimator.ClickAnimation();
    }
 
    private void UpdateInfectedTexts()
    {
-      InfecdedTextShop.text = "infected: " + Math.Round(Infected).ToString();
       InfectedText.text = "infected: " + Math.Round(Infected).ToString();
    }
 }
