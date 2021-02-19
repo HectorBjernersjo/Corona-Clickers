@@ -4,9 +4,31 @@ using UnityEngine;
 
 public class OpenShopScript : MonoBehaviour
 {
-   public GameObject Shop;
+    public GameObject Shop;
+    public GameObject ipspanel;
+    public GameObject ipcpanel;
+    public void Openips(){
+        ipspanel.SetActive(true);
 
-   public void OpenShop() {
+    }
+
+    public void Closeipspanel()
+    {
+        ipspanel.SetActive(false);
+    }
+
+    public void Openipcpanel()
+    {
+        ipcpanel.SetActive(true);
+    }
+
+    public void Closeipcpanel()
+    {
+        ipcpanel.SetActive(false);
+    }
+
+
+        public void OpenShop() {
       Shop.SetActive(true);
    }
 
