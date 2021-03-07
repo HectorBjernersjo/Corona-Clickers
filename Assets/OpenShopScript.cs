@@ -27,7 +27,6 @@ public class OpenShopScript : MonoBehaviour
         ipcpanel.SetActive(false);
     }
 
-
         public void OpenShop() {
       Shop.SetActive(true);
    }

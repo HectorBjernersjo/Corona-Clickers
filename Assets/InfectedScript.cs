@@ -30,7 +30,7 @@ public class InfectedScript : MonoBehaviour
 
    public void InfectClick() 
    {
-      Infected += 1;
+      Infected += InfectedPerTap;
       UpdateInfectedTexts();
       coronaAnimator.ClickAnimation();
    }

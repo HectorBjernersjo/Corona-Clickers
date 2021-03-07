@@ -6,14 +6,18 @@ using UnityEngine.UI;
 
 public class KoffScript : MonoBehaviour
 {
-   private Text NrKoffstext;
+        private Text NrKoffstext;
    public int NrOfKoffs;
    public double IncreaseInfectedPerSec = 0.1;
+    public double IncreaseInfectedPerTap;
    public Text InfcPerSectext;
+    public double Cost;
+    public Text CostText;
 
-   // Start is called before the first frame update
-   void Start()
+    // Start is called before the first frame update
+    void Start()
    {
+        CostText.text = Cost.ToString(); 
       var MostlyUselessTextList = this.GetComponentsInChildren<Text>();
 
       foreach (Text text in MostlyUselessTextList) 
@@ -27,11 +31,13 @@ public class KoffScript : MonoBehaviour
 
   public void BuyKoff()
    {
-      if (InfectedScript.Infected >= 20)
+      if (InfectedScript.Infected >= Cost)
       {
          InfectedScript.InfectedPerSec += IncreaseInfectedPerSec;
-         NrOfKoffs += 1;
-         InfectedScript.Infected -= 20;
+            InfectedScript.InfectedPerTap += IncreaseInfectedPerTap;
+
+            NrOfKoffs += 1;
+         InfectedScript.Infected -= Cost;
          NrKoffstext.text = NrOfKoffs + " koffs";
          UpdateInfcPerSecText();
       }
@@ -40,7 +46,8 @@ public class KoffScript : MonoBehaviour
    public void UpdateInfcPerSecText()
    {
       InfcPerSectext.text = Math.Round(InfectedScript.InfectedPerSec, 1) + " Infected per second";
-      //Emmas första accomplishment! :D 
+      //Emmas första accomplishment! :( (nt längre) fast typ ju! fast ne fast jo 
+
    }
 
     // VÄlkommen hem Emma!
