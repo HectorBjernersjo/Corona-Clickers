@@ -14,10 +14,11 @@ public class KoffScript : MonoBehaviour
     public double Cost;
     public Text CostText;
 
+
     // Start is called before the first frame update
     void Start()
    {
-        CostText.text = Cost.ToString(); 
+        UpdateTexts();
       var MostlyUselessTextList = this.GetComponentsInChildren<Text>();
 
       foreach (Text text in MostlyUselessTextList) 
@@ -39,16 +40,20 @@ public class KoffScript : MonoBehaviour
             NrOfKoffs += 1;
          InfectedScript.Infected -= Cost;
          NrKoffstext.text = NrOfKoffs + " koffs";
-         UpdateInfcPerSecText();
-      }
+
+            Cost = Math.Round(Cost * 1.1);
+       
+            UpdateTexts();
+        }
    }
 
-   public void UpdateInfcPerSecText()
+   public void UpdateTexts()
    {
       InfcPerSectext.text = Math.Round(InfectedScript.InfectedPerSec, 1) + " Infected per second";
-      //Emmas första accomplishment! :( (nt längre) fast typ ju! fast ne fast jo 
+        //Emmas första accomplishment! :( (nt längre) fast typ ju! fast ne fast jo 
+        CostText.text = Cost.ToString();
 
-   }
+    }
 
     // VÄlkommen hem Emma!
     void Update()

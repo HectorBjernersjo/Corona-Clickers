@@ -33,5 +33,8 @@ public class OpenShopScript : MonoBehaviour
 
    public void CloseShop() {
       Shop.SetActive(false);
+        ipcpanel.SetActive(false);
+            ipspanel.SetActive(false);
+        //OMG!!! Epic
    }
 }
