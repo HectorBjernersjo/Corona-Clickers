@@ -28,7 +28,7 @@ public class InfectedScript : MonoBehaviour
    }
 
 
-   public void InfectClick() 
+   public void InfectClick()
    {
       Infected += InfectedPerTap;
       UpdateInfectedTexts();

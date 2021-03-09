@@ -1,40 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class OpenShopScript : MonoBehaviour
 {
-    public GameObject Shop;
-    public GameObject ipspanel;
-    public GameObject ipcpanel;
-    public void Openips(){
-        ipspanel.SetActive(true);
+   public GameObject Shop;
+   public GameObject IpsPanel;
+   public GameObject IptPanel;
+   public void OpenIpsPanel()
+   {
+      IpsPanel.SetActive(true);
+   }
 
-    }
+   public void CloseIpsPanel()
+   {
+      IpsPanel.SetActive(false);
+   }
 
-    public void Closeipspanel()
-    {
-        ipspanel.SetActive(false);
-    }
+   public void OpenIptPanel()
+   {
+      IptPanel.SetActive(true);
+   }
 
-    public void Openipcpanel()
-    {
-        ipcpanel.SetActive(true);
-    }
+   public void CloseIpcPanel()
+   {
+      IptPanel.SetActive(false);
+   }
 
-    public void Closeipcpanel()
-    {
-        ipcpanel.SetActive(false);
-    }
-
-        public void OpenShop() {
+   public void OpenShop()
+   {
       Shop.SetActive(true);
    }
 
-   public void CloseShop() {
+   public void CloseShop()
+   {
       Shop.SetActive(false);
-        ipcpanel.SetActive(false);
-            ipspanel.SetActive(false);
-        //OMG!!! Epic
+      IptPanel.SetActive(false);
+      IpsPanel.SetActive(false);
+      //OMG!!! Epic
    }
 }
