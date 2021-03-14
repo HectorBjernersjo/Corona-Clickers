@@ -13,6 +13,7 @@ public class KoffScript : MonoBehaviour
    public Text InfcPerSectext;
    public double Cost;
    public Text CostText;
+   public Text Increasetext;
 
 
    // Start is called before the first frame update
@@ -53,6 +54,14 @@ public class KoffScript : MonoBehaviour
       //Emmas första accomplishment! :( (nt längre) fast typ ju! fast ne fast jo 
       CostText.text = Cost.ToString();
 
+      if (IncreaseInfectedPerSec > IncreaseInfectedPerTap)
+      {
+         Increasetext.text = "IPS: +" + IncreaseInfectedPerSec.ToString();
+      }
+      else
+      {
+         Increasetext.text = "IPT: +" + IncreaseInfectedPerTap.ToString();
+      }
    }
 
    // VÄlkommen hem Emma!

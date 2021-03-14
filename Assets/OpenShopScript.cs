@@ -20,7 +20,7 @@ public class OpenShopScript : MonoBehaviour
       IptPanel.SetActive(true);
    }
 
-   public void CloseIpcPanel()
+   public void CloseIpcPanel() 
    {
       IptPanel.SetActive(false);
    }

@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 2b93265291d88cd4085f66b02aee7c0d, type: 3}
+  m_Texture: {fileID: 2800000, guid: 3fd594ec8546c064eb1165ca33c9c6d1, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -85,3 +85,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a2ae19d7ab2e36418afc9c32c17dc9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Speed: 0
+  RoatationSpeed: 0
+  StartPosition: {x: 0, y: 0, z: 0}
