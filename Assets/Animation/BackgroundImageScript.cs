@@ -10,9 +10,9 @@ public class BackgroundImageScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-      Speed = Random.Range(10, 50);
+      Speed = 30;
       StartPosition = new Vector3(1,3,4);
-      RoatationSpeed = Random.Range(-20, 20);
+      RoatationSpeed =0;
     }
 
    public void SetStartLocation()

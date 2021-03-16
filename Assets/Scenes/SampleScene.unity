@@ -1639,6 +1639,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BackgroundCorona: {fileID: 6163347286796192357, guid: dfafe3a32c409a1449f36e9728002ed8, type: 3}
+  GoldCorona: {fileID: 5549826423644053229, guid: 2aae38feccf360442b4ecab88f0dd8d5, type: 3}
 --- !u!1 &680594001
 GameObject:
   m_ObjectHideFlags: 0
