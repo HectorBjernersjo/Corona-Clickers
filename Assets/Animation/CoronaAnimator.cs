@@ -20,7 +20,7 @@ public class CoronaAnimator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      this.transform.Rotate(-Vector3.forward * Time.deltaTime * rotationSpeed);
+      //this.transform.Rotate(-Vector3.forward * Time.deltaTime * rotationSpeed);
 
       if (transform.localScale.x > 1)
       {
