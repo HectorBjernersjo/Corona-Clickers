@@ -18,7 +18,7 @@ public class aura : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       aura1.transform.Rotate(0,0,0.05f);
-       aura2.transform.Rotate(0, 0, -0.05f);
+       aura1.transform.Rotate(0,0,Time.deltaTime * 3);
+       aura2.transform.Rotate(0, 0, -Time.deltaTime * 3);
    }
 }
