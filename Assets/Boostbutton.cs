@@ -29,7 +29,6 @@ public class Boostbutton : MonoBehaviour
          Boost = false;
          Boosttext.gameObject.SetActive(false);
          //Emmas second achivement :D :)
-
       } 
    }
 }
