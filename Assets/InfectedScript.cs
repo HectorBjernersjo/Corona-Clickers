@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class InfectedScript : MonoBehaviour
 {
-   public static double Infected;
-   public static double InfectedPerTap = 1;
-   public static double InfectedPerSec = 0;
+   public static float Infected;
+   public static float InfectedPerTap = 1;
+   public static float InfectedPerSec = 0;
 
    public Text InfectedText;
    public Text Infectedpstext;
@@ -45,14 +45,14 @@ public class InfectedScript : MonoBehaviour
 
    private void UpdateInfectedTexts()
    {
-      InfectedText.text = "infected: " + Math.Round(Infected).ToString();
+      InfectedText.text = "infected: " + PengaNamn.FormateraMedEnhet((float)Math.Round(Infected));
       if (Boostbutton.Boost == true)
       {
-         Infectedpstext.text = Math.Round(InfectedScript.InfectedPerSec * 2) + " Infected per second";
+         Infectedpstext.text = PengaNamn.FormateraMedEnhet((float) Math.Round(InfectedScript.InfectedPerSec * 2)) + " Infected per second";
       }
       else
       {
-         Infectedpstext.text = Math.Round(InfectedScript.InfectedPerSec) + " Infected per second";
+         Infectedpstext.text = PengaNamn.FormateraMedEnhet((float) Math.Round(InfectedScript.InfectedPerSec)) + " Infected per second";
       }
    }
 }

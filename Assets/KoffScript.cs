@@ -8,12 +8,13 @@ public class KoffScript : MonoBehaviour
 {
    private Text NrKoffstext;
    public int NrOfKoffs;
-   public double IncreaseInfectedPerSec = 0.1;
-   public double IncreaseInfectedPerTap;
+   public float IncreaseInfectedPerSec = 0.1f;
+   public float IncreaseInfectedPerTap;
    public Text InfcPerSectext;
-   public double Cost;
+   public float Cost;
    public Text CostText;
    public Text Increasetext;
+
 
 
    // Start is called before the first frame update
@@ -29,6 +30,7 @@ public class KoffScript : MonoBehaviour
             NrKoffstext = text;
          }
       }
+
    }
 
    public void BuyKoff()
@@ -42,10 +44,12 @@ public class KoffScript : MonoBehaviour
          InfectedScript.Infected -= Cost;
          NrKoffstext.text = NrOfKoffs + " koffs";
 
-         Cost = Math.Round(Cost * 1.1);
+         Cost = (float) Math.Round(Cost * 1.1);
 
          UpdateTexts();
       }
+
+      Ads.ShowAD();
    }
 
    public void UpdateTexts()
