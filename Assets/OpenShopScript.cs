@@ -5,6 +5,9 @@ public class OpenShopScript : MonoBehaviour
    public GameObject Shop;
    public GameObject IpsPanel;
    public GameObject IptPanel;
+   public GameObject AscensionUpgradesPanel;
+   public GameObject AscensionTopPanel;
+   public GameObject NormalTopPanel;
 
    public void OpenShop()
    {
@@ -16,6 +19,9 @@ public class OpenShopScript : MonoBehaviour
       Shop.SetActive(false);
       IptPanel.SetActive(false);
       IpsPanel.SetActive(false);
+      AscensionUpgradesPanel.SetActive(false);
+      AscensionTopPanel.SetActive(false);
+      NormalTopPanel.SetActive(true);
       //OMG!!! Epic
    }
 }

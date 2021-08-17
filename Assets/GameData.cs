@@ -9,25 +9,44 @@ using UnityEngine.Assertions.Comparers;
 [System.Serializable]
 public class GameData
 {
-   public float Infected;
-   public float InfectedPerSec;
-   public float InfectedPerTap;
-   public float[] KoffCosts;
-   public int[] KoffAmounts;
+   public double Infected;
+   public double InfectedThisAscension;
+
+   public double InfectedPerSecNoBoost;
+   public double InfectedPerTapNoBoost;
+
+   public double[] BuildingCosts;
+   public int[] BuildingAmounts;
+
+   public bool[] AscensionUpgradesOwned;
+
+   public bool TapComboIsActive;
 
    public float SaveTimeSeconds;
+   public float BoostSecondsLeft;
+
+   public double Ascension_LeftToNextPoint;
+   public double Ascension_Points;
 
    public GameData()
    {
-
       Infected = InfectedScript.Infected;
-      InfectedPerSec = InfectedScript.InfectedPerSec;
-      InfectedPerTap = InfectedScript.InfectedPerTap;
+      InfectedThisAscension = InfectedScript.InfectedEver;
 
-      KoffCosts = SaveAndLoadScript.KoffList.Select(k => k.Cost).ToArray();
-      KoffAmounts = SaveAndLoadScript.KoffList.Select(k => k.NrOfKoffs).ToArray();
+      InfectedPerSecNoBoost = InfectedScript.GetInfectedPerSec(ignoreBoost:true);
+      InfectedPerTapNoBoost = InfectedScript.GetInfectedPerTap();
+
+      BuildingCosts = BuildingHandler.BuildingList.Select(b => b.CurrentCost).ToArray();
+      BuildingAmounts = BuildingHandler.BuildingList.Select(b => b.NrBought).ToArray();
+
+      AscensionUpgradesOwned = AscensionUpgradeHandler.AscensionUpgrades.Select(u => u.Owned).ToArray();
+
+      TapComboIsActive = AscensionUpgradeHandler.TapComboUpgrade.Owned;
 
       SaveTimeSeconds = (float) (DateTime.Now - SaveAndLoadScript.TimeZero).TotalSeconds;
+      BoostSecondsLeft = Boost.BoostSecondsLeft;
+
+      Ascension_Points = Ascension.AscensionPoints;
    }
 
 }

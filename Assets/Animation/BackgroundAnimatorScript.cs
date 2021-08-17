@@ -24,7 +24,7 @@ public class BackgroundAnimatorScript : MonoBehaviour
 
       if (counter >= 1/spawnSpeed)
       {
-            if (Boostbutton.Boost == true)
+            if (Boost.BoostSecondsLeft > 0)
             {
                 var currentCoronaImage = Instantiate(GoldCorona);
                 currentCoronaImage.transform.SetParent(this.transform);

@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class CoronaAnimator : MonoBehaviour
 {
-   int rotationSpeed = 2;
    float alphaSpeed = 0.8f;
 
    public Text TapAnimationText;
@@ -58,6 +57,6 @@ public class CoronaAnimator : MonoBehaviour
       var animationtext = Instantiate(TapAnimationText, new Vector3(Input.mousePosition.x + Random.Range(-50, 50), Input.mousePosition.y + Random.Range(-50, 50), 0), Quaternion.identity);
       animationtext.transform.SetParent(this.transform.parent);
       animationTextList.Add(animationtext);
-      animationtext.text = InfectedScript.InfectedPerTap.ToString();
+      animationtext.text = PengaNamn.FormateraMedEnhet(InfectedScript.GetInfectedPerTap(), true);
    }
 }

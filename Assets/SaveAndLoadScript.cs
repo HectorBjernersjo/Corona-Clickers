@@ -1,13 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SaveAndLoadScript : MonoBehaviour
 {
-   public static List<KoffScript> KoffList = new List<KoffScript>();
-
    public static float LoadTimeSeconds;
    public static float SecondsOffline;
    public static DateTime TimeZero = new DateTime(2021,1,1);
@@ -15,45 +14,105 @@ public class SaveAndLoadScript : MonoBehaviour
    public GameObject OfflinePanel;
    public Text OfflineText;
 
+   void Update()
+   {
+      
+   }
+
    void Start()
    {
-      foreach (var koff in GetComponentsInChildren<KoffScript>(includeInactive:true))
-      {
-         KoffList.Add(koff);
-      }
       Load();
    }
 
-   void OnApplicationQuit()
+   void OnApplicationQuit() 
    {
-
       SaveSystem.SaveGame();
    }
+
+
 
    public void Load()
    {
       GameData data = SaveSystem.LoadGame();
 
-      LoadTimeSeconds = (float) (DateTime.Now - TimeZero).TotalSeconds;
-      SecondsOffline = (float) LoadTimeSeconds - data.SaveTimeSeconds;
+      SetInfectedVariables(data);
+      SetAscendVariables(data);
+      SetBuildingVars(data);
+      SetAscensionUppgradeVars(data);
+      InfectOffline(data);
 
-      InfectedScript.Infected = data.Infected;
-      InfectedScript.InfectedPerSec = data.InfectedPerSec;
-      InfectedScript.InfectedPerTap = data.InfectedPerTap;
+      TapCombo.IsActive = data.TapComboIsActive;  
 
-      InfectedScript.Infected += SecondsOffline * InfectedScript.InfectedPerSec;
+      Boost.BoostSecondsLeft = data.BoostSecondsLeft - SecondsOffline;
+      if (Boost.BoostSecondsLeft > 0)
+         Boost.Instance.BoostSlider.gameObject.SetActive(true);
 
-      for (var i = 0; i < KoffList.Count; i++)
-      {
-         var koff = KoffList[i];
-         koff.Cost = data.KoffCosts[i];
-         koff.NrOfKoffs = data.KoffAmounts [i];
       }
+
+   private void SetAscendVariables(GameData data)
+   {
+      Ascension.AscensionPoints = data.Ascension_Points;
+   }
+
+
+   private void SetBuildingVars(GameData data)
+   {
+      for (var i = 0; i < BuildingHandler.BuildingList.Count; i++)
+      {
+         var building = BuildingHandler.BuildingList[i];
+         building.CurrentCost = data.BuildingCosts[i]; 
+         building.NrBought = data.BuildingAmounts[i];
+      }
+   }
+
+   private void SetAscensionUppgradeVars(GameData data)
+   {
+      for (var i = 0; i < AscensionUpgradeHandler.AscensionUpgrades.Count; i++)
+      {
+         var upgrade = AscensionUpgradeHandler.AscensionUpgrades[i];
+         upgrade.Owned = data.AscensionUpgradesOwned[i];
+         if (upgrade.Owned)
+            upgrade.GetComponent<Image>().color = Color.green;
+      }
+   }
+
+   private void SetInfectedVariables(GameData data)
+   {
+      InfectedScript.Infected = data.Infected;
+      InfectedScript.InfectedEver = data.InfectedThisAscension;
+   }
+
+
+   private void InfectOffline(GameData data)
+   {
+      var infectedBeforeOfflineEarnings = InfectedScript.Infected;
+
+      LoadTimeSeconds = (float)(DateTime.Now - TimeZero).TotalSeconds;
+      SecondsOffline = LoadTimeSeconds - data.SaveTimeSeconds;
+
+
+      if (data.BoostSecondsLeft > SecondsOffline)
+      {
+         InfectedScript.Infect(seconds: SecondsOffline * 2, ignoreBoost: true);
+      }
+
+      if (data.BoostSecondsLeft < SecondsOffline && data.BoostSecondsLeft > 0)
+      {
+         InfectedScript.Infect(seconds:data.BoostSecondsLeft, ignoreBoost:true);
+         InfectedScript.Infect(seconds:SecondsOffline);
+      }
+      if(data.BoostSecondsLeft <= 0)
+      {
+         InfectedScript.Infect(seconds: SecondsOffline, ignoreBoost:true);
+      }
+
+      var offlineEarnings = InfectedScript.Infected - infectedBeforeOfflineEarnings;
 
       if (data != null)
       {
          OfflinePanel.SetActive(true);
-         OfflineText.text = (SecondsOffline * InfectedScript.InfectedPerSec).ToString();
+         OfflineText.text = PengaNamn.FormateraMedEnhet(offlineEarnings); 
       }
+
    }
 }

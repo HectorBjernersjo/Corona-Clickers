@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class OfflineScript : MonoBehaviour
 {
    public Text OfflineInfectedText;
-   public float InfectedWhileOffline;
+   public double InfectedWhileOffline;
 
     void Start()
     {

@@ -1,19 +1,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InfectedScript : MonoBehaviour
 {
-   public static float Infected;
-   public static float InfectedPerTap = 1;
-   public static float InfectedPerSec = 0;
+   public static double Infected;
+   public static double InfectedEver;
 
-   public Text InfectedText;
-   public Text Infectedpstext;
+   public static Text InfectedText;
+   public static Text InfectedPerSecText;
 
-   CoronaAnimator coronaAnimator;
+   private CoronaAnimator coronaAnimator;
 
    private void Start()
    {
@@ -22,37 +22,85 @@ public class InfectedScript : MonoBehaviour
 
    private void Update()
    {
-      //Infecta varje sekund
-      
-      UpdateInfectedTexts();
-      if (Boostbutton.Boost == true)
-      {
-         Infected += InfectedPerSec * Time.deltaTime * 2;
-      }
-      else
-      {
-         Infected += InfectedPerSec * Time.deltaTime;
-      }
+      Infect(seconds:Time.deltaTime);
    }
-
-
    public void InfectClick()
    {
-      Infected += InfectedPerTap;
-      UpdateInfectedTexts();
+      Infect(GetInfectedPerTap());
+      if(TapCombo.IsActive)
+         TapCombo.ToDoWhenClick();
       coronaAnimator.ClickAnimation();
    }
 
-   private void UpdateInfectedTexts()
+   public static double GetInfectedPerSec(bool ignoreBoost = false)
    {
-      InfectedText.text = "infected: " + PengaNamn.FormateraMedEnhet((float)Math.Round(Infected));
-      if (Boostbutton.Boost == true)
+      double infectedPerSec = 0;
+
+      foreach (var building in BuildingHandler.BuildingList)
       {
-         Infectedpstext.text = PengaNamn.FormateraMedEnhet((float) Math.Round(InfectedScript.InfectedPerSec * 2)) + " Infected per second";
+         infectedPerSec += building.NrBought * building.IncreaseInfectedPerSec;
       }
-      else
+
+      if (!ignoreBoost)
+         if(Boost.BoostSecondsLeft > 0)
+            infectedPerSec *= 2;
+
+      infectedPerSec *= Ascension.IPSUpgradeMultiplier;
+
+      return infectedPerSec;
+   }
+
+   public static double GetInfectedPerTap()
+   {
+      double infectedPerTap = 1;
+
+      foreach (var building in BuildingHandler.BuildingList)
       {
-         Infectedpstext.text = PengaNamn.FormateraMedEnhet((float) Math.Round(InfectedScript.InfectedPerSec)) + " Infected per second";
+         infectedPerTap += building.NrBought * building.IncreaseInfectedPerTap;
       }
+
+      infectedPerTap *= Ascension.IPTUpgradeMultiplier;
+      infectedPerTap *= TapCombo.TapMultiplier;
+
+      return infectedPerTap;
+   }
+
+
+   public static void Infect(double nrInfected = 0, float seconds = 0, bool ignoreBoost = false)
+   {
+      double toInfect = 0;
+
+      toInfect += nrInfected;
+      toInfect += seconds * GetInfectedPerSec(ignoreBoost);
+      
+      //if (boost)
+      //{
+      //   toInfect += nrInfected * 2;
+      //   toInfect += seconds * InfectedPerSecNoBoost * 2;
+      //}
+      //else
+      //{
+      //   toInfect += nrInfected;
+      //   toInfect += seconds * InfectedPerSecNoBoost;
+      //}
+
+      Ascension.InfectedHasIncreased(toInfect);
+      Infected += toInfect;
+      InfectedEver += toInfect;
+
+      UpdateInfectedTexts();
+   }
+
+   private static void UpdateInfectedTexts()
+   {
+      if (InfectedText == null)
+      {
+         InfectedText = GameObject.Find("InfectedText").GetComponent<Text>();
+         InfectedPerSecText = GameObject.Find("InfectedPerSecText").GetComponent<Text>();
+      }
+      InfectedText.text = "infected: " + PengaNamn.FormateraMedEnhet(Infected, true); 
+
+
+      InfectedPerSecText.text = PengaNamn.FormateraMedEnhet(GetInfectedPerSec(), true) + " Infected per second";
    }
 }
