@@ -13,7 +13,7 @@ public class MyCanvas : MonoBehaviour
    public Text TopPanelPossiblePointsText;
    public Text TopPanelAscensionPointsText;
    public GameObject AscensionShopButton;
-
+   public Text AscensionPanelText;
 
    // Start is called before the first frame update
    void Start()

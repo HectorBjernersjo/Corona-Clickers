@@ -10,6 +10,6 @@ public class ResistentBacteria : AscensionUpgrade
    }
    public override void SpecialBuyStuff()
    {
-      Ascension.IPSUpgradeMultiplier *= 1.2f;
+      Ascension.IpsUpgradeMultiplier *= 1.2f;
    }
 }

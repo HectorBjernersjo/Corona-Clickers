@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CheatCodes : MonoBehaviour
 {
@@ -31,10 +32,18 @@ public class CheatCodes : MonoBehaviour
        Ascension.PossiblePoints = 0;
        Ascension.SpentPoints = 0;
        Ascension.UpdateTexts();
-
+       Ascension.IpsUpgradeMultiplier = 1;
+       Ascension.IptUpgradeMultiplier = 1;
+       Discount.TapCostMultiplier = 1;
+       Discount.TimeCostMultiplier = 1;
+       TapCombo.IsActive = false;
+       BiotechResearch.BiotechResearchMultiplier = 1;
+       BiotechBusiness.BiotechBusinessMultiplier = 1;
+       Boost.BoostSecondsLeft = 0;
        foreach (var upgrade in AscensionUpgradeHandler.AscensionUpgrades)
        {
           upgrade.Owned = false;
+          upgrade.GetComponent<Image>().color = Color.white;
        }
     }
 }

@@ -41,6 +41,12 @@ public class SaveAndLoadScript : MonoBehaviour
       SetAscensionUppgradeVars(data);
       InfectOffline(data);
 
+      Ascension.IpsUpgradeMultiplier = data.IpsUpgradeMultiplier;
+      Ascension.IptUpgradeMultiplier = data.IptUpgradeMultiplier;
+      Discount.TapCostMultiplier = data.TapCostMultiplier;
+      Discount.TimeCostMultiplier = data.TimeCostMultiplier;
+      BiotechBusiness.BiotechBusinessMultiplier = data.BioTechBusinessMultiplier;
+
       TapCombo.IsActive = data.TapComboIsActive;  
 
       Boost.BoostSecondsLeft = data.BoostSecondsLeft - SecondsOffline;
@@ -52,6 +58,7 @@ public class SaveAndLoadScript : MonoBehaviour
    private void SetAscendVariables(GameData data)
    {
       Ascension.AscensionPoints = data.Ascension_Points;
+      Ascension.SpentPoints = data.AscensionPointsSpent;
    }
 
 
@@ -72,8 +79,10 @@ public class SaveAndLoadScript : MonoBehaviour
          var upgrade = AscensionUpgradeHandler.AscensionUpgrades[i];
          upgrade.Owned = data.AscensionUpgradesOwned[i];
          if (upgrade.Owned)
-            upgrade.GetComponent<Image>().color = Color.green;
+            upgrade.GetComponent<Image>().color = AscensionUpgrade.OwnedGreen;
       }
+
+      BiotechResearch.BiotechResearchMultiplier = data.BioTechResearchMultiplier;
    }
 
    private void SetInfectedVariables(GameData data)

@@ -45,7 +45,7 @@ public class InfectedScript : MonoBehaviour
          if(Boost.BoostSecondsLeft > 0)
             infectedPerSec *= 2;
 
-      infectedPerSec *= Ascension.IPSUpgradeMultiplier;
+      infectedPerSec *= Ascension.GetIpsMultiplier();
 
       return infectedPerSec;
    }
@@ -59,7 +59,7 @@ public class InfectedScript : MonoBehaviour
          infectedPerTap += building.NrBought * building.IncreaseInfectedPerTap;
       }
 
-      infectedPerTap *= Ascension.IPTUpgradeMultiplier;
+      infectedPerTap *= Ascension.GetIptMultiplier();
       infectedPerTap *= TapCombo.TapMultiplier;
 
       return infectedPerTap;

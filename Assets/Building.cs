@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Building : MonoBehaviour
 {
-   internal int NrBought;
+   internal double NrBought;
    public double IncreaseInfectedPerSec;
    public double IncreaseInfectedPerTap;
 
@@ -28,31 +28,55 @@ public class Building : MonoBehaviour
 
    public void Buy()
    {
-      if (InfectedScript.Infected >= CurrentCost)
+      if (InfectedScript.Infected >= GetCostForAll(BuyMultiplier.Multiplier))
       {
-         NrBought += 1;
-         InfectedScript.Infected -= CurrentCost;
-
-         CurrentCost = Math.Round(CurrentCost * 1.1);
+         InfectedScript.Infected -= GetCostForAll(BuyMultiplier.Multiplier);
+         NrBought += BuyMultiplier.Multiplier;
 
          UpdateTexts();
       }
 
    }
 
+   private double GetCostForAll(double amountToBuy)
+   {
+      var costForAll = 0.0;
+
+      for (int i = 0; i < amountToBuy; i++)
+      {
+         costForAll += GetCostForOne() * Math.Pow(1.1, i);
+      }
+
+      return costForAll;
+   }
+
+   public double GetCostForOne()
+   {
+      double currentCostMultiplier;
+
+      if (IncreaseInfectedPerSec > IncreaseInfectedPerTap)
+         currentCostMultiplier = Discount.TimeCostMultiplier;
+      else
+         currentCostMultiplier = Discount.TapCostMultiplier;
+
+      var cost = StartCost * Math.Pow(1.1, NrBought) * currentCostMultiplier * BiotechBusiness.BiotechBusinessMultiplier;
+
+      return cost;
+   }
+
    public void UpdateTexts()
    {
       //Emmas första accomplishment! :( (nt längre) fast typ ju! fast ne fast jo 
-      CostText.text = PengaNamn.FormateraMedEnhet(CurrentCost);
+      CostText.text = PengaNamn.FormateraMedEnhet(GetCostForAll(BuyMultiplier.Multiplier));
       NrBoughtText.text = "lvl " + NrBought;
 
       if (IncreaseInfectedPerSec > IncreaseInfectedPerTap)
       {
-         IncreaseText.text = PengaNamn.FormateraMedEnhet(IncreaseInfectedPerSec, true);
+         IncreaseText.text = PengaNamn.FormateraMedEnhet(IncreaseInfectedPerSec * BuyMultiplier.Multiplier * Ascension.GetIpsMultiplier(), true);
       }
       else
       {
-         IncreaseText.text = PengaNamn.FormateraMedEnhet(IncreaseInfectedPerTap, true);
+         IncreaseText.text = PengaNamn.FormateraMedEnhet(IncreaseInfectedPerTap * BuyMultiplier.Multiplier * Ascension.GetIptMultiplier(), true);
       }
    }
 

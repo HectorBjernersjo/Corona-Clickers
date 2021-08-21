@@ -12,6 +12,10 @@ public class OpenShopScript : MonoBehaviour
    public void OpenShop()
    {
       Shop.SetActive(true);
+      foreach (var building in BuildingHandler.BuildingList)
+      {
+         building.UpdateTexts();
+      }
    }
 
    public void CloseShop()

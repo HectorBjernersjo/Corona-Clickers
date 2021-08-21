@@ -20,12 +20,13 @@ public class Ascension : MonoBehaviour
    public static Text TopPanelPossiblePointsText;
    public static Text TopPanelAscensionPointsText;
    public static GameObject AscensionShopButton;
+   public static Text AscensionPanelText;
 
    public Text TextPrefab;
    public List<Text> TextPrefabs = new List<Text>();
 
-   public static double IPSUpgradeMultiplier = 1;
-   public static double IPTUpgradeMultiplier = 1;
+   public static double IpsUpgradeMultiplier = 1;
+   public static double IptUpgradeMultiplier = 1;
 
    void Start()
    {
@@ -34,6 +35,7 @@ public class Ascension : MonoBehaviour
       TopPanelPossiblePointsText = MyCanvas.Instance.TopPanelPossiblePointsText;
       TopPanelAscensionPointsText = MyCanvas.Instance.TopPanelAscensionPointsText;
       AscensionShopButton = MyCanvas.Instance.AscensionShopButton;
+      AscensionPanelText = MyCanvas.Instance.AscensionPanelText;
    }
 
    public static void InfectedHasIncreased(double infected)
@@ -51,6 +53,16 @@ public class Ascension : MonoBehaviour
          return possiblePoints;
       return 0;
 
+   }
+
+   public static double GetIpsMultiplier()
+   {
+      return IpsUpgradeMultiplier * BiotechResearch.BiotechResearchMultiplier;
+   }
+
+   public static double GetIptMultiplier()
+   {
+      return IptUpgradeMultiplier * BiotechResearch.BiotechResearchMultiplier;
    }
 
    private static void UpdateSlider()
@@ -75,6 +87,7 @@ public class Ascension : MonoBehaviour
       //AscensionSlider.value = (float)((NeededPerPoint - LeftToNextPoint)/ NeededPerPoint);
       TopPanelPossiblePointsText.text = "Restarting would grant you " + PengaNamn.FormateraMedEnhet(PossiblePoints) + " ascension points";
       TopPanelAscensionPointsText.text = "Ascension points:" + PengaNamn.FormateraMedEnhet(AscensionPoints);
+      AscensionPanelText.text = "Ascend (restart) to earn " + PossiblePoints + " ascension points. Spend these on special ascension upgrades to get a big boost on your next playthrough.";
    }
 
    public static void Ascend()

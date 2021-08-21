@@ -11,6 +11,7 @@ public class AscensionUpgrade : MonoBehaviour
 
    public Text CostText;
 
+   public static Color OwnedGreen = new Color(99 / 255f, 199 / 255f, 77/255f);
 
    void Start()
    {
@@ -24,16 +25,16 @@ public class AscensionUpgrade : MonoBehaviour
       
    }
 
-   public void Buy()
+   public void Buy(bool canBeBoughtMultipleTimes = false)
    {
-      if (Ascension.AscensionPoints >= Cost && !Owned)
+      if (Ascension.AscensionPoints >= Cost && (!Owned || canBeBoughtMultipleTimes))
       {
          Ascension.AscensionPoints -= Cost;
          Ascension.SpentPoints += Cost;
          Owned = true;
          SpecialBuyStuff();
          UpdateText();
-         GetComponent<Image>().color = Color.green;
+         GetComponent<Image>().color = OwnedGreen;
       }
    }
 
