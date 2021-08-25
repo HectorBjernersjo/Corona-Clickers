@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class AscensionUpgrade : MonoBehaviour
 {
-   internal double Cost;
+   public double Cost;
    internal bool Owned;
 
    public Text CostText;
@@ -24,6 +24,8 @@ public class AscensionUpgrade : MonoBehaviour
    {
       
    }
+
+   public virtual void UpdateUi(){}
 
    public void Buy(bool canBeBoughtMultipleTimes = false)
    {

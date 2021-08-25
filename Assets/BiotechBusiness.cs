@@ -10,17 +10,17 @@ public class BiotechBusiness : AscensionUpgrade
    public Text DiscountText;
    public override void SetVariables()
    {
-      Cost = 1;
+      
       UpdateUi();
    }
 
    public override void SpecialBuyStuff()
    {
-      BiotechBusinessMultiplier = BiotechBusinessMultiplier * 0.98;
+      BiotechBusinessMultiplier = BiotechBusinessMultiplier * 0.95;
       UpdateUi();
    }
 
-   public void UpdateUi()
+   public override void UpdateUi()
    {
       if(BiotechBusinessMultiplier <= 0.01)
          DiscountText.text = "Current Discount: " + ((1 - BiotechBusinessMultiplier) * 100).ToString("00.00####") + "%";

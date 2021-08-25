@@ -41,12 +41,6 @@ public class SaveAndLoadScript : MonoBehaviour
       SetAscensionUppgradeVars(data);
       InfectOffline(data);
 
-      Ascension.IpsUpgradeMultiplier = data.IpsUpgradeMultiplier;
-      Ascension.IptUpgradeMultiplier = data.IptUpgradeMultiplier;
-      Discount.TapCostMultiplier = data.TapCostMultiplier;
-      Discount.TimeCostMultiplier = data.TimeCostMultiplier;
-      BiotechBusiness.BiotechBusinessMultiplier = data.BioTechBusinessMultiplier;
-
       TapCombo.IsActive = data.TapComboIsActive;  
 
       Boost.BoostSecondsLeft = data.BoostSecondsLeft - SecondsOffline;
@@ -80,9 +74,19 @@ public class SaveAndLoadScript : MonoBehaviour
          upgrade.Owned = data.AscensionUpgradesOwned[i];
          if (upgrade.Owned)
             upgrade.GetComponent<Image>().color = AscensionUpgrade.OwnedGreen;
+
+         upgrade.UpdateUi();
       }
 
       BiotechResearch.BiotechResearchMultiplier = data.BioTechResearchMultiplier;
+      BiotechBusiness.BiotechBusinessMultiplier = data.BioTechBusinessMultiplier;
+      Ascension.IpsUpgradeMultiplier = data.IpsUpgradeMultiplier;
+      Ascension.IptUpgradeMultiplier = data.IptUpgradeMultiplier;
+      Discount.TapCostMultiplier = data.TapCostMultiplier;
+      Discount.TimeCostMultiplier = data.TimeCostMultiplier;
+      BoostUpgrade.BoostEarningMultiplier = data.BoostEarningMultiplier;
+      BoostUpgrade.BoostTimeMultiplier = data.BoostTimeMultiplier;
+      Cooperation.IsActive = data.CooperationIsActive;
    }
 
    private void SetInfectedVariables(GameData data)
@@ -102,7 +106,7 @@ public class SaveAndLoadScript : MonoBehaviour
 
       if (data.BoostSecondsLeft > SecondsOffline)
       {
-         InfectedScript.Infect(seconds: SecondsOffline * 2, ignoreBoost: true);
+         InfectedScript.Infect(seconds: SecondsOffline * BoostUpgrade.BoostEarningMultiplier, ignoreBoost: true);
       }
 
       if (data.BoostSecondsLeft < SecondsOffline && data.BoostSecondsLeft > 0)

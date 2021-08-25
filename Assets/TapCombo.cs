@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class TapCombo : MonoBehaviour
 {
    public static float TapMultiplier = 1;
-   internal static float IncreasePerTap = 0.01f;
+   internal static float IncreasePerTap = 0.03f;
    private static float fadeOutCounter;
    private static float fadeOutCounterMax = 2;
    public static bool IsActive;

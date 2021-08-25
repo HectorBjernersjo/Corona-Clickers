@@ -18,6 +18,9 @@ public class GameData
    public double BioTechBusinessMultiplier;
    public double TapCostMultiplier;
    public double TimeCostMultiplier;
+   public float BoostTimeMultiplier;
+   public float BoostEarningMultiplier;
+   public bool CooperationIsActive;
 
    public double InfectedPerSecNoBoost;
    public double InfectedPerTapNoBoost;
@@ -47,6 +50,9 @@ public class GameData
       BioTechBusinessMultiplier = BiotechBusiness.BiotechBusinessMultiplier;
       TapCostMultiplier = Discount.TapCostMultiplier;
       TimeCostMultiplier = Discount.TimeCostMultiplier;
+      BoostTimeMultiplier = BoostUpgrade.BoostTimeMultiplier;
+      BoostEarningMultiplier = BoostUpgrade.BoostEarningMultiplier;
+      CooperationIsActive = Cooperation.IsActive;
 
       InfectedPerSecNoBoost = InfectedScript.GetInfectedPerSec(ignoreBoost:true);
       InfectedPerTapNoBoost = InfectedScript.GetInfectedPerTap();

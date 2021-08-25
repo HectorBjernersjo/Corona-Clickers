@@ -6,7 +6,7 @@ public class TapComboUpgrade : AscensionUpgrade
 {
    public override void SetVariables()
    {
-      Cost = 20;
+      
    }
 
    public override void SpecialBuyStuff()

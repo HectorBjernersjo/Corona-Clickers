@@ -12,17 +12,24 @@ public class Boost : MonoBehaviour
    public Text BoostText;
    public Slider BoostSlider;
    public static Boost Instance;
+   public GameObject BoostPanel;
 
    void Start()
    {
       Instance = this;
    }
-         
+
+
+   public void ShowBoostPanel()
+   {
+      if(BoostSecondsLeft <= 0)
+         BoostPanel.SetActive(true);
+   }
 
    public void BoostFunction()
    {
       Ads.ShowBonusVid();
-      BoostSecondsLeft = 3600;
+      BoostSecondsLeft = (float) (3600 * BoostUpgrade.BoostTimeMultiplier);
       BoostSlider.gameObject.SetActive(true);
    }
 
@@ -41,7 +48,7 @@ public class Boost : MonoBehaviour
          TimeSpan timeLeft = TimeSpan.FromSeconds(Math.Round(BoostSecondsLeft));
 
          BoostText.text = timeLeft.ToString();
-         BoostSlider.value = BoostSecondsLeft / 3600;
+         BoostSlider.value = (float) (BoostSecondsLeft / (3600 * BoostUpgrade.BoostTimeMultiplier));
       }
    }
 }

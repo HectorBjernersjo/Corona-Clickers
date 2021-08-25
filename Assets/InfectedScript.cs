@@ -43,7 +43,7 @@ public class InfectedScript : MonoBehaviour
 
       if (!ignoreBoost)
          if(Boost.BoostSecondsLeft > 0)
-            infectedPerSec *= 2;
+            infectedPerSec *= BoostUpgrade.BoostEarningMultiplier;
 
       infectedPerSec *= Ascension.GetIpsMultiplier();
 
@@ -62,11 +62,14 @@ public class InfectedScript : MonoBehaviour
       infectedPerTap *= Ascension.GetIptMultiplier();
       infectedPerTap *= TapCombo.TapMultiplier;
 
+      if (Cooperation.IsActive && Math.Log10(GetInfectedPerSec())>0)
+         infectedPerTap *= 1 + (Math.Log10(GetInfectedPerSec()) * 100) /100;
+
       return infectedPerTap;
    }
 
 
-   public static void Infect(double nrInfected = 0, float seconds = 0, bool ignoreBoost = false)
+   public static void Infect(double nrInfected = 0, double seconds = 0, bool ignoreBoost = false)
    {
       double toInfect = 0;
 

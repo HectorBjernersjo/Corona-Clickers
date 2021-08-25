@@ -39,7 +39,10 @@ public class CheatCodes : MonoBehaviour
        TapCombo.IsActive = false;
        BiotechResearch.BiotechResearchMultiplier = 1;
        BiotechBusiness.BiotechBusinessMultiplier = 1;
+       BoostUpgrade.BoostEarningMultiplier = 2;
+       BoostUpgrade.BoostTimeMultiplier = 1;
        Boost.BoostSecondsLeft = 0;
+       Cooperation.IsActive = false;
        foreach (var upgrade in AscensionUpgradeHandler.AscensionUpgrades)
        {
           upgrade.Owned = false;

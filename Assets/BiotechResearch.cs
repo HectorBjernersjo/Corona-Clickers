@@ -12,13 +12,18 @@ public class BiotechResearch : AscensionUpgrade
 
    public override void SetVariables()
    {
-      Cost = 1;
-      CurrentBoostText.text = "Current Boost: " + ((BiotechResearchMultiplier - 1) * 100).ToString("00.00") + "%";
+      
+      UpdateUi();
    }
 
    public override void SpecialBuyStuff()
    {
-      BiotechResearchMultiplier *= 1.02;
+      BiotechResearchMultiplier *= 1.05;
+      UpdateUi();
+   }
+
+   public override void UpdateUi()
+   {
       CurrentBoostText.text = "Current Boost: " + ((BiotechResearchMultiplier - 1) * 100).ToString("00.00") + "%";
    }
 }
