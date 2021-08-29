@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class TextAnimationScript : MonoBehaviour
 {
-   public float UpwardsSpeed = 0.5f;
-   public float SideSpeed = 0.2f;
+   internal float UpwardsSpeed = ScreenSize.SomePercentageOfTheScreen;
+   internal float SideSpeed = ScreenSize.SomePercentageOfTheScreen;
 }

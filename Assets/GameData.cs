@@ -10,7 +10,7 @@ using UnityEngine.Assertions.Comparers;
 public class GameData
 {
    public double Infected;
-   public double InfectedThisAscension;
+   public double InfectedEver;
 
    public double IpsUpgradeMultiplier;
    public double IptUpgradeMultiplier;
@@ -42,7 +42,7 @@ public class GameData
    public GameData()
    {
       Infected = InfectedScript.Infected;
-      InfectedThisAscension = InfectedScript.InfectedEver;
+      InfectedEver = InfectedScript.InfectedEver;
 
       IpsUpgradeMultiplier = Ascension.IpsUpgradeMultiplier;
       IptUpgradeMultiplier = Ascension.IptUpgradeMultiplier;

@@ -13,7 +13,7 @@ public class Ascension : MonoBehaviour
    public static double PossiblePoints;
    public static double SpentPoints;
 
-   public static double firstPointCost  = 1000;
+   public static double FirstPointCost  = 1000000;
 
    public static Text PossiblePointsText;
    public static Slider AscensionSlider;
@@ -36,6 +36,9 @@ public class Ascension : MonoBehaviour
       TopPanelAscensionPointsText = MyCanvas.Instance.TopPanelAscensionPointsText;
       AscensionShopButton = MyCanvas.Instance.AscensionShopButton;
       AscensionPanelText = MyCanvas.Instance.AscensionPanelText;
+
+      if(!HasAscendedBefore)
+         MyCanvas.Instance.AscensionRecommendationText.gameObject.SetActive(true);
    }
 
    public static void InfectedHasIncreased(double infected)
@@ -45,12 +48,17 @@ public class Ascension : MonoBehaviour
       UpdateSlider();
    }
 
-   private static double GetPossiblePoints()
+   public static double GetPossiblePoints()
    {
-      var possiblePoints = Math.Floor(Math.Log10(InfectedScript.InfectedEver) * 10 - AscensionPoints - SpentPoints - Math.Log10(firstPointCost) * 10);
+      var possiblePoints = Math.Floor(Math.Log10(InfectedScript.InfectedEver) * 10 - AscensionPoints - SpentPoints - Math.Log10(FirstPointCost) * 10);
 
       if (possiblePoints >= 0)
+      {
+         MyCanvas.Instance.AscendButton.SetActive(true);
          return possiblePoints;
+      }
+
+      MyCanvas.Instance.AscendButton.SetActive(false);
       return 0;
 
    }
@@ -70,24 +78,23 @@ public class Ascension : MonoBehaviour
       double lastPointTotal;
 
       if (PossiblePoints + AscensionPoints >= 1)
-         lastPointTotal = Math.Pow(10, (PossiblePoints + AscensionPoints + SpentPoints + Math.Log10(firstPointCost) * 10) / 10.0);
+         lastPointTotal = Math.Pow(10, (PossiblePoints + AscensionPoints + SpentPoints + Math.Log10(FirstPointCost) * 10) / 10.0);
       else
          lastPointTotal = 0;
 
-      var nextPointTotal = Math.Pow(10, (PossiblePoints + AscensionPoints + SpentPoints + Math.Log10(firstPointCost) * 10 + 1)/10.0);
+      var nextPointTotal = Math.Pow(10, (PossiblePoints + AscensionPoints + SpentPoints + Math.Log10(FirstPointCost) * 10 + 1)/10.0);
       var fromLastToNextPoint = nextPointTotal - lastPointTotal;
       var percentageFilled = (InfectedScript.InfectedEver - lastPointTotal) / fromLastToNextPoint;
-      AscensionSlider.value = (float)percentageFilled;
+      MyCanvas.Instance.AscensionSlider.value = (float)percentageFilled;
    }
 
 
    public static void UpdateTexts()
    {
-      PossiblePointsText.text = PengaNamn.FormateraMedEnhet(PossiblePoints);
-      //AscensionSlider.value = (float)((NeededPerPoint - LeftToNextPoint)/ NeededPerPoint);
-      TopPanelPossiblePointsText.text = "Restarting would grant you " + PengaNamn.FormateraMedEnhet(PossiblePoints) + " ascension points";
-      TopPanelAscensionPointsText.text = "Ascension points:" + PengaNamn.FormateraMedEnhet(AscensionPoints);
-      AscensionPanelText.text = "Ascend (restart) to earn " + PossiblePoints + " ascension points. Spend these on special ascension upgrades to get a big boost on your next playthrough.";
+      MyCanvas.Instance.PossiblePointsText.text = PengaNamn.FormateraMedEnhet(PossiblePoints);
+      MyCanvas.Instance.TopPanelPossiblePointsText.text = "Restarting would grant you " + PengaNamn.FormateraMedEnhet(PossiblePoints) + " ascension points";
+      MyCanvas.Instance.TopPanelAscensionPointsText.text = "Ascension points: " + PengaNamn.FormateraMedEnhet(AscensionPoints);
+      MyCanvas.Instance.AscensionPanelText.text = "Ascend (restart) to earn " + PossiblePoints + " ascension points. Spend these on special ascension upgrades to get a big boost on your next playthrough.";
    }
 
    public static void Ascend()

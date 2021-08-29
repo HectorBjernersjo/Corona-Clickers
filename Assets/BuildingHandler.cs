@@ -5,7 +5,7 @@ using UnityEngine;
 public class BuildingHandler : MonoBehaviour
 {
    public static List<Building> BuildingList = new List<Building>();
-   void Start()
+   void Awake()
     {
       foreach (var building in GetComponentsInChildren<Building>(includeInactive: true))
       {

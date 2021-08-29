@@ -13,6 +13,8 @@ public class Boost : MonoBehaviour
    public Slider BoostSlider;
    public static Boost Instance;
    public GameObject BoostPanel;
+   public Text BoostInfoText;
+   public GameObject SkippedPanel;
 
    void Start()
    {
@@ -24,13 +26,18 @@ public class Boost : MonoBehaviour
    {
       if(BoostSecondsLeft <= 0)
          BoostPanel.SetActive(true);
+
+      if (BoostUpgrade.BoostEarningMultiplier < 3 && BoostUpgrade.BoostTimeMultiplier < 2)
+         BoostInfoText.text = "Watch an ad to double your ips (infected per second) for 2 hours";
+      else
+         BoostInfoText.text = "Watch an ad to multiply your ips by " + Math.Round(BoostUpgrade.BoostEarningMultiplier) +
+                              " for " + Math.Round(BoostUpgrade.BoostTimeMultiplier, 1) + " hours";
+
    }
 
    public void BoostFunction()
    {
       Ads.ShowBonusVid();
-      BoostSecondsLeft = (float) (3600 * BoostUpgrade.BoostTimeMultiplier);
-      BoostSlider.gameObject.SetActive(true);
    }
 
    void Update()

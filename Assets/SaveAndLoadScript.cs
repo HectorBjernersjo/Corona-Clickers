@@ -19,16 +19,18 @@ public class SaveAndLoadScript : MonoBehaviour
       
    }
 
-   void Start()
+   void OnApplicationFocus(bool focus)
    {
-      Load();
+      if(focus)
+         Load();
+      else
+         SaveSystem.SaveGame();
    }
 
-   void OnApplicationQuit() 
+   void OnApplicationQuit()
    {
       SaveSystem.SaveGame();
    }
-
 
 
    public void Load()
@@ -40,14 +42,19 @@ public class SaveAndLoadScript : MonoBehaviour
       SetBuildingVars(data);
       SetAscensionUppgradeVars(data);
       InfectOffline(data);
+         
+      TapCombo.IsActive = data.TapComboIsActive;
 
-      TapCombo.IsActive = data.TapComboIsActive;  
+      if (InfectedScript.InfectedEver < 10000)
+         MyCanvas.Instance.BoostButton.SetActive(false);
+      else
+         MyCanvas.Instance.BoostButton.SetActive(true);
 
       Boost.BoostSecondsLeft = data.BoostSecondsLeft - SecondsOffline;
       if (Boost.BoostSecondsLeft > 0)
          Boost.Instance.BoostSlider.gameObject.SetActive(true);
 
-      }
+   }
 
    private void SetAscendVariables(GameData data)
    {
@@ -92,7 +99,7 @@ public class SaveAndLoadScript : MonoBehaviour
    private void SetInfectedVariables(GameData data)
    {
       InfectedScript.Infected = data.Infected;
-      InfectedScript.InfectedEver = data.InfectedThisAscension;
+      InfectedScript.InfectedEver = data.InfectedEver;
    }
 
 

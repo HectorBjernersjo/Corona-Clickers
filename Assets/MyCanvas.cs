@@ -14,9 +14,12 @@ public class MyCanvas : MonoBehaviour
    public Text TopPanelAscensionPointsText;
    public GameObject AscensionShopButton;
    public Text AscensionPanelText;
+   public Text AscensionRecommendationText;
+   public GameObject BoostButton;
+   public GameObject AscendButton;
 
    // Start is called before the first frame update
-   void Start()
+   void Awake()
     {
        Instance = this;
     }

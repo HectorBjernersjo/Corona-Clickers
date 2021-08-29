@@ -105,5 +105,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c540981ab6906b4d9bfed64817b8403, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UpwardsSpeed: 0.4
-  SideSpeed: 0.4
+  UpwardsSpeed: 1000
+  SideSpeed: 1000

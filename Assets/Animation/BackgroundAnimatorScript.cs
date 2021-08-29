@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,7 @@ public class BackgroundAnimatorScript : MonoBehaviour
     public RawImage GoldCorona;
     List<RawImage> BackgroundCoronaList = new List<RawImage>();
    float counter;
-    float spawnSpeed = 2;
+    float spawnSpeed = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -24,22 +25,19 @@ public class BackgroundAnimatorScript : MonoBehaviour
 
       if (counter >= 1/spawnSpeed)
       {
+         RawImage currentCoronaImage;
             if (Boost.BoostSecondsLeft > 0)
-            {
-                var currentCoronaImage = Instantiate(GoldCorona);
-                currentCoronaImage.transform.SetParent(this.transform);
-                currentCoronaImage.GetComponent<BackgroundImageScript>().SetStartLocation();
-                BackgroundCoronaList.Add(currentCoronaImage);
-                counter = 0;
-            }
+               currentCoronaImage = Instantiate(GoldCorona);
             else
-            {
-                var currentCoronaImage = Instantiate(BackgroundCorona);
-                currentCoronaImage.transform.SetParent(this.transform);
-                currentCoronaImage.GetComponent<BackgroundImageScript>().SetStartLocation();
-                BackgroundCoronaList.Add(currentCoronaImage);
-                counter = 0;
-            }
+                currentCoronaImage = Instantiate(BackgroundCorona);
+
+            currentCoronaImage.transform.SetParent(this.transform);
+            currentCoronaImage.GetComponent<BackgroundImageScript>().SetStartLocation();
+
+            currentCoronaImage.transform.localScale = new Vector3(ScreenSize.SomePercentageOfTheScreen, ScreenSize.SomePercentageOfTheScreen, 1);
+
+            BackgroundCoronaList.Add(currentCoronaImage);
+            counter = 0;
       }
 
       foreach (RawImage coronaImage in BackgroundCoronaList.ToArray())

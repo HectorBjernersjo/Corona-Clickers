@@ -7,6 +7,7 @@ public class CoronaAnimator : MonoBehaviour
 {
    float alphaSpeed = 0.8f;
 
+
    public Text TapAnimationText;
 
    List<Text> animationTextList = new List<Text>();
@@ -19,8 +20,6 @@ public class CoronaAnimator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      //this.transform.Rotate(-Vector3.forward * Time.deltaTime * rotationSpeed);
-
       if (transform.localScale.x > 1)
       {
          this.transform.localScale -= new Vector3(1f, 1f, 1f) * Time.deltaTime * 0.3f;
@@ -31,10 +30,11 @@ public class CoronaAnimator : MonoBehaviour
          var textAnimator = animationText.GetComponent<TextAnimationScript>();
 
          var transform = animationText.transform.localPosition;
+
          transform.Set(transform.x + textAnimator.SideSpeed, transform.y + textAnimator.UpwardsSpeed, transform.z);
 
-         textAnimator.UpwardsSpeed -= Time.deltaTime;
-         textAnimator.SideSpeed -= Time.deltaTime/3;
+         textAnimator.UpwardsSpeed -= Time.deltaTime * ScreenSize.SomePercentageOfTheScreen * 2;
+         textAnimator.SideSpeed -= Time.deltaTime * ScreenSize.SomePercentageOfTheScreen;
 
          animationText.transform.localPosition = transform;
 
@@ -52,11 +52,12 @@ public class CoronaAnimator : MonoBehaviour
 
    public void ClickAnimation ()
    {
-      this.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
+      transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
 
-      var animationtext = Instantiate(TapAnimationText, new Vector3(Input.mousePosition.x + Random.Range(-50, 50), Input.mousePosition.y + Random.Range(-50, 50), 0), Quaternion.identity);
-      animationtext.transform.SetParent(this.transform.parent);
-      animationTextList.Add(animationtext);
-      animationtext.text = PengaNamn.FormateraMedEnhet(InfectedScript.GetInfectedPerTap(), true);
+      var animationText = Instantiate(TapAnimationText, new Vector3(Input.mousePosition.x, Input.mousePosition.y - 50, 0), Quaternion.identity);
+      animationText.transform.SetParent(this.transform.parent);
+      animationTextList.Add(animationText);
+      animationText.text = PengaNamn.FormateraMedEnhet(InfectedScript.GetInfectedPerTap(), true);
+      animationText.transform.localScale = new Vector3(ScreenSize.SomePercentageOfTheScreen / 1.6f, ScreenSize.SomePercentageOfTheScreen / 1.6f, 1);
    }
 }
