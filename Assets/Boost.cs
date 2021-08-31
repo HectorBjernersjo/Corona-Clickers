@@ -38,6 +38,8 @@ public class Boost : MonoBehaviour
    public void BoostFunction()
    {
       Ads.ShowBonusVid();
+      BoostSecondsLeft = (float)(3600 * BoostUpgrade.BoostTimeMultiplier);
+      Instance.BoostSlider.gameObject.SetActive(true);
    }
 
    void Update()
