@@ -8,7 +8,7 @@ public class AscensionUpgradeHandler : MonoBehaviour
    public static TapComboUpgrade TapComboUpgrade;
 
    // Start is called before the first frame update
-   void Start()
+   void Awake()
     {
       foreach (var building in GetComponentsInChildren<AscensionUpgrade>(includeInactive: true))
       {

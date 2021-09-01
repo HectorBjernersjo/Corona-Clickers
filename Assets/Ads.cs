@@ -43,18 +43,18 @@ public class Ads : MonoBehaviour, IUnityAdsListener
 
    public void OnUnityAdsDidFinish(string placement, ShowResult showResult)
    {
-      if (showResult == ShowResult.Finished)
-      {
-         Boost.BoostSecondsLeft = (float)(3600 * BoostUpgrade.BoostTimeMultiplier);
-         Boost.Instance.BoostSlider.gameObject.SetActive(true);
-      }
-      else if (showResult == ShowResult.Skipped)
-      {
-         Boost.Instance.SkippedPanel.SetActive(true);
-      }
-      else if (showResult == ShowResult.Failed)
-      {
-         Debug.Log("epic ad fail");
-      }
+      //if (showResult == ShowResult.Finished)
+      //{
+      //   Boost.BoostSecondsLeft = (float)(3600 * BoostTimeUpgrade.BoostTimeMultiplier);
+      //   Boost.Instance.BoostSlider.gameObject.SetActive(true);
+      //}
+      //else if (showResult == ShowResult.Skipped)
+      //{
+      //   Boost.Instance.SkippedPanel.SetActive(true);
+      //}
+      //else if (showResult == ShowResult.Failed)
+      //{
+      //   Debug.Log("epic ad fail");
+      //}
    }
 }

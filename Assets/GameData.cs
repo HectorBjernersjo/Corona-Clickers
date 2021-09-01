@@ -29,6 +29,7 @@ public class GameData
    public double[] BuildingAmounts;
 
    public bool[] AscensionUpgradesOwned;
+   public double[] AscensionUpgradesNuberOwned;
    public double AscensionPointsSpent;
 
    public bool TapComboIsActive;
@@ -44,14 +45,12 @@ public class GameData
       Infected = InfectedScript.Infected;
       InfectedEver = InfectedScript.InfectedEver;
 
-      IpsUpgradeMultiplier = Ascension.IpsUpgradeMultiplier;
-      IptUpgradeMultiplier = Ascension.IptUpgradeMultiplier;
       BioTechResearchMultiplier = BiotechResearch.BiotechResearchMultiplier;
       BioTechBusinessMultiplier = BiotechBusiness.BiotechBusinessMultiplier;
-      TapCostMultiplier = Discount.TapCostMultiplier;
-      TimeCostMultiplier = Discount.TimeCostMultiplier;
-      BoostTimeMultiplier = BoostUpgrade.BoostTimeMultiplier;
-      BoostEarningMultiplier = BoostUpgrade.BoostEarningMultiplier;
+      TapCostMultiplier = TapDiscount.TapCostMultiplier;
+      TimeCostMultiplier = TimeDiscount.TimeCostMultiplier;
+      BoostTimeMultiplier = BoostTimeUpgrade.BoostTimeMultiplier;
+      BoostEarningMultiplier = BoostEarningUpgrade.BoostEarningMultiplier;
       CooperationIsActive = Cooperation.IsActive;
 
       InfectedPerSecNoBoost = InfectedScript.GetInfectedPerSec(ignoreBoost:true);
@@ -61,6 +60,7 @@ public class GameData
       BuildingAmounts = BuildingHandler.BuildingList.Select(b => b.NrBought).ToArray();
 
       AscensionUpgradesOwned = AscensionUpgradeHandler.AscensionUpgrades.Select(u => u.Owned).ToArray();
+      AscensionUpgradesNuberOwned = AscensionUpgradeHandler.AscensionUpgrades.Select(u => u.NrOwned).ToArray();
       AscensionPointsSpent = Ascension.SpentPoints;
 
       TapComboIsActive = AscensionUpgradeHandler.TapComboUpgrade.Owned;
@@ -70,5 +70,4 @@ public class GameData
 
       Ascension_Points = Ascension.AscensionPoints;
    }
-
 }

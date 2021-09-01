@@ -43,7 +43,7 @@ public class InfectedScript : MonoBehaviour
 
       if (!ignoreBoost)
          if(Boost.BoostSecondsLeft > 0)
-            infectedPerSec *= BoostUpgrade.BoostEarningMultiplier;
+            infectedPerSec *= BoostEarningUpgrade.BoostEarningMultiplier;
 
       infectedPerSec *= Ascension.GetIpsMultiplier();
 

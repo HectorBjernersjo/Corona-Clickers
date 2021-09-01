@@ -6,8 +6,9 @@ using UnityEngine.UI;
 
 public class BiotechBusiness : AscensionUpgrade
 {
-   public static double BiotechBusinessMultiplier = 1;
+   public static double BiotechBusinessMultiplier => Math.Pow(0.95, Instance.NrOwned);
    public Text DiscountText;
+   public static BiotechBusiness Instance;
    public override void SetVariables()
    {
       
@@ -16,15 +17,19 @@ public class BiotechBusiness : AscensionUpgrade
 
    public override void SpecialBuyStuff()
    {
-      BiotechBusinessMultiplier = BiotechBusinessMultiplier * 0.95;
       UpdateUi();
+   }
+
+   public BiotechBusiness()
+   {
+      Instance = this;
    }
 
    public override void UpdateUi()
    {
       if(BiotechBusinessMultiplier <= 0.01)
-         DiscountText.text = "Current Discount: " + ((1 - BiotechBusinessMultiplier) * 100).ToString("00.00####") + "%";
+         DiscountText.text = "Current TimeDiscount: " + ((1 - BiotechBusinessMultiplier) * 100).ToString("00.00####") + "%";
       else
-         DiscountText.text = "Current Discount: " + ((1 - BiotechBusinessMultiplier) * 100).ToString("00.00") + "%";
+         DiscountText.text = "Current TimeDiscount: " + ((1 - BiotechBusinessMultiplier) * 100).ToString("00.00") + "%";
    }
 }

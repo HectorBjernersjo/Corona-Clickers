@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -6,19 +7,22 @@ using UnityEngine.UI;
 
 public class BiotechResearch : AscensionUpgrade
 {
-   public static double BiotechResearchMultiplier = 1;
-
+   public static double BiotechResearchMultiplier => Math.Pow(1.05, Instance.NrOwned);
+   public static BiotechResearch Instance;
    public Text CurrentBoostText;
+
+   public BiotechResearch()
+   {
+      Instance = this;
+   }
 
    public override void SetVariables()
    {
-      
       UpdateUi();
    }
 
    public override void SpecialBuyStuff()
    {
-      BiotechResearchMultiplier *= 1.05;
       UpdateUi();
    }
 

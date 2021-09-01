@@ -871,10 +871,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 83658589}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 573b4446ba107294cbcc11316ea4312c, type: 3}
+  m_Script: {fileID: 11500000, guid: e80dfd27042f34b42a89fab80c5e0c0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Cost: 20
+  NrOwned: 0
   CostText: {fileID: 0}
 --- !u!1 &90154398
 GameObject:
@@ -1262,7 +1263,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &129547482
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1505,7 +1506,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8131512244937298649, guid: cea66f016ef8b5647bb302e6c5b77962, type: 3}
       propertyPath: StartCost
-      value: 100000000000
+      value: 1000000000000
       objectReference: {fileID: 0}
     - target: {fileID: 8131512244937298649, guid: cea66f016ef8b5647bb302e6c5b77962, type: 3}
       propertyPath: IncreaseInfectedPerSec
@@ -1635,6 +1636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cost: 1
+  NrOwned: 0
   CostText: {fileID: 0}
   DiscountText: {fileID: 1105031691}
 --- !u!1001 &175081980
@@ -2281,6 +2283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cost: 20
+  NrOwned: 0
   CostText: {fileID: 0}
 --- !u!1 &216503905
 GameObject:
@@ -4612,7 +4615,6 @@ GameObject:
   - component: {fileID: 466796388}
   - component: {fileID: 466796387}
   - component: {fileID: 466796386}
-  - component: {fileID: 466796389}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -4733,20 +4735,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 466796384}
   m_CullTransparentMesh: 1
---- !u!114 &466796389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 466796384}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77f60335b6db8aa44be74019132b7b5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Cost: 0
-  CostText: {fileID: 0}
 --- !u!1001 &482669759
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4934,6 +4922,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cost: 1
+  NrOwned: 0
   CostText: {fileID: 0}
   CurrentBoostText: {fileID: 1876090653}
 --- !u!1001 &539589280
@@ -5160,6 +5149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cost: 30
+  NrOwned: 0
   CostText: {fileID: 0}
   PercentIncreaseText: {fileID: 1597547390}
 --- !u!1001 &551922085
@@ -5740,7 +5730,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1839730443977062144, guid: d2e38baf4c744ee4ebc252640ff96fdf, type: 3}
       propertyPath: m_Text
-      value: Boosts lasts for ten times as long
+      value: Boosts lasts for five times as long
       objectReference: {fileID: 0}
     - target: {fileID: 3479179145981369379, guid: d2e38baf4c744ee4ebc252640ff96fdf, type: 3}
       propertyPath: m_Texture
@@ -5907,10 +5897,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 586914954}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9c4f2b5ee130a24ba10da7e36712233, type: 3}
+  m_Script: {fileID: 11500000, guid: e0204bd8f3cd6c4408ea1720e16be5fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cost: 15
+  Cost: 0
+  NrOwned: 0
   CostText: {fileID: 0}
 --- !u!1 &597163530
 GameObject:
@@ -7220,7 +7211,6 @@ MonoBehaviour:
   BoostSlider: {fileID: 323085581}
   BoostPanel: {fileID: 179107743}
   BoostInfoText: {fileID: 1942200316}
-  SkippedPanel: {fileID: 436258919}
 --- !u!1 &731404969
 GameObject:
   m_ObjectHideFlags: 0
@@ -7354,6 +7344,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cost: 30
+  NrOwned: 0
   CostText: {fileID: 0}
 --- !u!1 &793544437
 GameObject:
@@ -7735,7 +7726,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1839730443977062144, guid: d2e38baf4c744ee4ebc252640ff96fdf, type: 3}
       propertyPath: m_Text
-      value: Boosts is ten times more effective but only lasts for a fifth of the
+      value: Boost multiplies your earnings by ten but only lasts for half of the
         time
       objectReference: {fileID: 0}
     - target: {fileID: 3479179145981369379, guid: d2e38baf4c744ee4ebc252640ff96fdf, type: 3}
@@ -7907,6 +7898,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cost: 15
+  NrOwned: 0
   CostText: {fileID: 0}
 --- !u!224 &833188394 stripped
 RectTransform:
@@ -8694,6 +8686,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OfflinePanel: {fileID: 216503905}
   OfflineText: {fileID: 400306738}
+  AscensionShopButton: {fileID: 1133889706}
 --- !u!114 &964352812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13608,7 +13601,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1806006206
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15476,6 +15469,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cost: 20
+  NrOwned: 0
   CostText: {fileID: 0}
 --- !u!1 &2096873834
 GameObject:

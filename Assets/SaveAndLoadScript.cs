@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,7 @@ public class SaveAndLoadScript : MonoBehaviour
 
    public GameObject OfflinePanel;
    public Text OfflineText;
+   public GameObject AscensionShopButton;
 
    void Update()
    {
@@ -24,7 +26,11 @@ public class SaveAndLoadScript : MonoBehaviour
       if(focus)
          Load();
       else
+      {
          SaveSystem.SaveGame();
+         GetComponentInChildren<OpenShopScript>(includeInactive:true).CloseShop();
+      }
+
    }
 
    void OnApplicationQuit()
@@ -54,6 +60,9 @@ public class SaveAndLoadScript : MonoBehaviour
       if (Boost.BoostSecondsLeft > 0)
          Boost.Instance.BoostSlider.gameObject.SetActive(true);
 
+      if(Ascension.AscensionPoints + Ascension.SpentPoints > 0)
+         AscensionShopButton.SetActive(true);
+
    }
 
    private void SetAscendVariables(GameData data)
@@ -79,21 +88,14 @@ public class SaveAndLoadScript : MonoBehaviour
       {
          var upgrade = AscensionUpgradeHandler.AscensionUpgrades[i];
          upgrade.Owned = data.AscensionUpgradesOwned[i];
+         upgrade.NrOwned = data.AscensionUpgradesNuberOwned[i];
          if (upgrade.Owned)
             upgrade.GetComponent<Image>().color = AscensionUpgrade.OwnedGreen;
 
          upgrade.UpdateUi();
       }
 
-      BiotechResearch.BiotechResearchMultiplier = data.BioTechResearchMultiplier;
-      BiotechBusiness.BiotechBusinessMultiplier = data.BioTechBusinessMultiplier;
-      Ascension.IpsUpgradeMultiplier = data.IpsUpgradeMultiplier;
-      Ascension.IptUpgradeMultiplier = data.IptUpgradeMultiplier;
-      Discount.TapCostMultiplier = data.TapCostMultiplier;
-      Discount.TimeCostMultiplier = data.TimeCostMultiplier;
-      BoostUpgrade.BoostEarningMultiplier = data.BoostEarningMultiplier;
-      BoostUpgrade.BoostTimeMultiplier = data.BoostTimeMultiplier;
-      Cooperation.IsActive = data.CooperationIsActive;
+      //var ascensionUpgradesParent = GetComponentsInChildren<GameObject>().First(g => g.name == "AscensionUpgradesPanel");
    }
 
    private void SetInfectedVariables(GameData data)
@@ -113,7 +115,7 @@ public class SaveAndLoadScript : MonoBehaviour
 
       if (data.BoostSecondsLeft > SecondsOffline)
       {
-         InfectedScript.Infect(seconds: SecondsOffline * BoostUpgrade.BoostEarningMultiplier, ignoreBoost: true);
+         InfectedScript.Infect(seconds: SecondsOffline * BoostEarningUpgrade.BoostEarningMultiplier, ignoreBoost: true);
       }
 
       if (data.BoostSecondsLeft < SecondsOffline && data.BoostSecondsLeft > 0)

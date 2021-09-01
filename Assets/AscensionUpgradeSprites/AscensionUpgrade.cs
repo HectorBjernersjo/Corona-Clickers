@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class AscensionUpgrade : MonoBehaviour
 {
    public double Cost;
+   public double NrOwned;
    internal bool Owned;
 
    public Text CostText;
@@ -15,7 +16,7 @@ public class AscensionUpgrade : MonoBehaviour
 
    void Start()
    {
-      SetVariables();
+       SetVariables();
       CostText = GetComponentsInChildren<Text>(includeInactive:true).First(t => t.name == "Cost");
       UpdateText();
    }
@@ -34,6 +35,7 @@ public class AscensionUpgrade : MonoBehaviour
          Ascension.AscensionPoints -= Cost;
          Ascension.SpentPoints += Cost;
          Owned = true;
+         NrOwned += 1;
          SpecialBuyStuff();
          UpdateText();
          GetComponent<Image>().color = OwnedGreen;

@@ -32,20 +32,12 @@ public class CheatCodes : MonoBehaviour
        Ascension.PossiblePoints = 0;
        Ascension.SpentPoints = 0;
        Ascension.UpdateTexts();
-       Ascension.IpsUpgradeMultiplier = 1;
-       Ascension.IptUpgradeMultiplier = 1;
-       Discount.TapCostMultiplier = 1;
-       Discount.TimeCostMultiplier = 1;
        TapCombo.IsActive = false;
-       BiotechResearch.BiotechResearchMultiplier = 1;
-       BiotechBusiness.BiotechBusinessMultiplier = 1;
-       BoostUpgrade.BoostEarningMultiplier = 2;
-       BoostUpgrade.BoostTimeMultiplier = 1;
        Boost.BoostSecondsLeft = 0;
-       Cooperation.IsActive = false;
        foreach (var upgrade in AscensionUpgradeHandler.AscensionUpgrades)
        {
           upgrade.Owned = false;
+          upgrade.NrOwned = 0;
           upgrade.GetComponent<Image>().color = Color.white;
        }
     }

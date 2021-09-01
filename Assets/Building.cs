@@ -55,9 +55,9 @@ public class Building : MonoBehaviour
       double currentCostMultiplier;
 
       if (IncreaseInfectedPerSec > IncreaseInfectedPerTap)
-         currentCostMultiplier = Discount.TimeCostMultiplier;
+         currentCostMultiplier = TimeDiscount.TimeCostMultiplier;
       else
-         currentCostMultiplier = Discount.TapCostMultiplier;
+         currentCostMultiplier = TapDiscount.TapCostMultiplier;
 
       var cost = StartCost * Math.Pow(1.1, NrBought) * currentCostMultiplier * BiotechBusiness.BiotechBusinessMultiplier;
 

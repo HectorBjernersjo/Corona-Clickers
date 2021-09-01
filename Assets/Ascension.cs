@@ -25,8 +25,6 @@ public class Ascension : MonoBehaviour
    public Text TextPrefab;
    public List<Text> TextPrefabs = new List<Text>();
 
-   public static double IpsUpgradeMultiplier = 1;
-   public static double IptUpgradeMultiplier = 1;
 
    void Start()
    {
@@ -54,30 +52,28 @@ public class Ascension : MonoBehaviour
 
       if (possiblePoints >= 0)
       {
-         MyCanvas.Instance.AscendButton.SetActive(true);
          return possiblePoints;
       }
 
-      MyCanvas.Instance.AscendButton.SetActive(false);
       return 0;
 
    }
 
    public static double GetIpsMultiplier()
    {
-      return IpsUpgradeMultiplier * BiotechResearch.BiotechResearchMultiplier;
+      return ResistentBacteria.IPSMultiplier * BiotechResearch.BiotechResearchMultiplier;
    }
 
    public static double GetIptMultiplier()
    {
-      return IptUpgradeMultiplier * BiotechResearch.BiotechResearchMultiplier;
+      return BiotechResearch.BiotechResearchMultiplier;
    }
 
    private static void UpdateSlider()
    {
       double lastPointTotal;
 
-      if (PossiblePoints + AscensionPoints >= 1)
+      if (PossiblePoints + AscensionPoints + SpentPoints >= 1)
          lastPointTotal = Math.Pow(10, (PossiblePoints + AscensionPoints + SpentPoints + Math.Log10(FirstPointCost) * 10) / 10.0);
       else
          lastPointTotal = 0;
@@ -133,6 +129,12 @@ public class Ascension : MonoBehaviour
          if (text.color.a == 0)
             Destroy(text);
       }
+
+      if(PossiblePoints + AscensionPoints + SpentPoints > 0)
+         MyCanvas.Instance.AscendButton.SetActive(true);
+      else
+         MyCanvas.Instance.AscendButton.SetActive(false);
+
    }
 
 }
